@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fitted Threads Landing Page</title>
+
+<!-- Animate.css -->
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+
+<!-- Google Fonts -->
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Comic+Neue:wght@700&family=Roboto&display=swap"
+rel="stylesheet"
+/>
+
+<style>
+body {
+margin: 0;
+min-height: 100vh;
+background: linear-gradient(135deg, #b8a58c, #d6c5a8);
+color: #4b3b2b;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+font-family: 'Roboto', sans-serif;
+text-align: center;
+padding: 20px;
+position: relative;
+overflow: hidden;
+}
+
+/* Background animated text */
+.background-container {
+position: absolute;
+top: 50%;
+left: 110%;
+width: max-content;
+transform-origin: center;
+transform: translateY(-50%) rotate(-6deg);
+font-family: 'Comic Neue', cursive;
+font-weight: 700;
+font-size: 9rem;
+line-height: 1;
+white-space: nowrap;
+text-align: center;
+color: rgba(107, 85, 65, 0.08);
+animation: moveTextRTL 18s linear infinite, colorShift 14s ease-in-out infinite alternate;
+pointer-events: none;
+z-index: 0;
+}
+
+/* Animate text moving right → left */
+@keyframes moveTextRTL {
+0% { left: 110%; }
+100% { left: -100%; }
+}
+
+/* Warm neutral color shifts */
+@keyframes colorShift {
+0% { color: rgba(107, 85, 65, 0.08); } /* soft brown */
+25% { color: rgba(143, 120, 91, 0.08); } /* taupe */
+50% { color: rgba(183, 159, 131, 0.08); } /* beige */
+75% { color: rgba(158, 134, 106, 0.08); } /* warm gray */
+100% { color: rgba(107, 85, 65, 0.08); }
+}
+
+h1, p, input, img {
+position: relative;
+z-index: 1;
+}
+
+h1 {
+font-family: 'Montserrat', sans-serif;
+font-size: 2.8rem;
+margin-bottom: 0.5em;
+color: #6b5541;
+}
+
+p {
+font-size: 1.2rem;
+max-width: 400px;
+margin-bottom: 2em;
+color: #4b3b2b;
+}
+
+input[type="file"] {
+background: linear-gradient(135deg, #a67c52, #c9a66b);
+color: white;
+padding: 0.8em 1.4em;
+border: none;
+border-radius: 8px;
+font-size: 1rem;
+cursor: pointer;
+transition: transform 0.2s ease, box-shadow 0.3s ease;
+font-family: 'Roboto', sans-serif;
+font-weight: 700;
+box-shadow: 0 2px 8px rgba(166, 124, 82, 0.7);
+}
+
+input[type="file"]:hover {
+transform: scale(1.05);
+box-shadow: 0 6px 20px rgba(166, 124, 82, 0.9);
+}
+
+img#preview {
+display: none;
+margin-top: 1em;
+max-width: 300px;
+border: 2px solid #6b5541;
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(107, 85, 65, 0.5);
+}
+</style>
+</head>
+<body>
+
+<!-- Animated background text -->
+<div class="background-container">
+Fitted<br>Threads
+</div>
+
+<h1 class="animate__animated animate__bounceInDown">
+Welcome to Fitted Threads
+</h1>
+<p class="animate__animated animate__fadeInUp animate__delay-1s">
+Try on your favorite styles virtually with AI-powered fashion.
+</p>
+
+<!-- Upload button -->
+<input type="file" accept="image/*" capture="environment" id="upload" />
+
+<!-- Image preview -->
+<img id="preview" alt="Image preview will appear here" />
+
+<script>
+const upload = document.getElementById('upload');
+const preview = document.getElementById('preview');
+
+upload.addEventListener('change', () => {
+const file = upload.files[0];
+if (!file) {
+preview.src = '';
+preview.style.display = 'none';
+return;
+}
+const reader = new FileReader();
+reader.onload = () => {
+preview.src = reader.result;
+preview.style.display = 'block';
+};
+reader.readAsDataURL(file);
+});
+</script>
+</body>
+</html>
